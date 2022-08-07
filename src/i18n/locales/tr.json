@@ -1,0 +1,11 @@
+{
+  "common": {
+    "turkish": "Türkçe",
+    "english": "İngilizce"
+  },
+  "header": {
+    "back": "Geri"
+  },
+  "dashboard": {
+  }
+}
