@@ -298,6 +298,8 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-splash-screen (3.3.0):
     - React-Core
+  - react-native-voice (3.2.4):
+    - React-Core
   - React-perflogger (0.69.3)
   - React-RCTActionSheet (0.69.3):
     - React-Core/RCTActionSheetHeaders (= 0.69.3)
@@ -424,6 +426,7 @@ DEPENDENCIES:
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - "react-native-voice (from `../node_modules/@react-native-voice/voice`)"
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -506,6 +509,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-voice:
+    :path: "../node_modules/@react-native-voice/voice"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -576,6 +581,7 @@ SPEC CHECKSUMS:
   react-native-flipper: cc9cdf47db2bbe0d9227eeec4f93e2290e55674b
   react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
+  react-native-voice: f5e8eec2278451d0017eb6a30a6ccc726aca34e0
   React-perflogger: 39d2ba8cbcac54d1bb1d9a980dab348e96aef467
   React-RCTActionSheet: b1ad907a2c8f8e4d037148ca507b7f2d6ab1c66d
   React-RCTAnimation: 914a9ba46fb6e7376f7709c7ce825d53b47ca2ee
