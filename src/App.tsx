@@ -1,5 +1,5 @@
 import React, {FC, Suspense, useEffect} from 'react';
-import {SafeAreaView} from 'react-native';
+import { SafeAreaView, StatusBar } from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import {isMountedRef, navigationRef} from './routes/navigationUtils';
 import {enableScreens} from 'react-native-screens';
@@ -29,6 +29,7 @@ const App: FC = () => {
         <PersistGate loading={<Splashscreen />} persistor={persistor}>
           <NavigationContainer ref={navigationRef}>
             <SafeAreaView style={{flex: 1}}>
+              <StatusBar barStyle="light-content" backgroundColor={'#1973E7'} />
               <RootStackScreen />
             </SafeAreaView>
           </NavigationContainer>
