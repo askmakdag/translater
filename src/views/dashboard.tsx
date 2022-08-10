@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import Header from '../components/header';
+import LanguageSwitcher from '../components/language-switcher';
+import InputView from '../components/input-view';
+import OutputView from '../components/output-view';
 
 export default function Dashboard() {
   return (
     <View style={style.container}>
-      <Text>Merhaba Dashboard</Text>
+      <Header />
+      <LanguageSwitcher />
+      <InputView />
+      <OutputView />
     </View>
   );
 }
@@ -12,7 +19,6 @@ export default function Dashboard() {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'red',
+    backgroundColor: '#F2F1F6',
   },
 });
