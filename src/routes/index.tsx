@@ -11,7 +11,13 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export const RootStackScreen: FC = () => {
   return (
     <RootStack.Navigator>
-      <RootStack.Screen name="Dashboard" component={Dashboard} />
+      <RootStack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          headerShown: false,
+        }}
+      />
     </RootStack.Navigator>
   );
 };
