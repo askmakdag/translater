@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import {SpeakerHigh, X} from 'phosphor-react-native';
+import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {GenericNavigationProps} from '../routes/types';
+import {Microphone, X} from 'phosphor-react-native';
+import {useNavigation} from '@react-navigation/core';
 
 export default function InputView() {
+  const navigation = useNavigation<GenericNavigationProps>();
   const [input, setInput] = useState<string>();
   const style = styles();
 
@@ -16,27 +13,36 @@ export default function InputView() {
     setInput('');
   }
 
+  function pressedToSpeak() {
+    navigation.push('SpeechDetection');
+  }
+
   return (
     <View style={style.container}>
       <View style={style.header}>
         <View style={style.headerLeft}>
-          <SpeakerHigh size={22} weight={'fill'} color={'#5F6369'} />
-          <Text style={style.language}>İNGİLİZCE</Text>
+          <TextInput
+            placeholder={'Metin giriniz...'}
+            value={input}
+            onChangeText={setInput}
+            style={style.textInput}
+            multiline={true}
+            numberOfLines={4}
+          />
         </View>
 
-        <TouchableOpacity onPress={clearInput}>
-          <X size={22} weight={'bold'} color={'#62646A'} />
+        <TouchableOpacity
+          onPress={pressedToSpeak}
+          style={{padding: 4, display: input ? 'none' : 'flex'}}>
+          <Microphone size={23} weight={'duotone'} color={'#5F6369'} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={clearInput}
+          style={{padding: 4, display: input ? 'flex' : 'none'}}>
+          <X size={23} weight={'duotone'} color={'#5F6369'} />
         </TouchableOpacity>
       </View>
-
-      <TextInput
-        placeholder={'Metin giriniz...'}
-        value={input}
-        onChangeText={setInput}
-        style={style.textInput}
-        multiline={true}
-        numberOfLines={4}
-      />
     </View>
   );
 }
@@ -53,12 +59,18 @@ const styles = () =>
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
       marginVertical: 4,
     },
     headerLeft: {
       flexDirection: 'row',
       alignItems: 'center',
+    },
+    headerRight: {
+      flexDirection: 'row',
+      backgroundColor: 'red',
+    },
+    microphone: {
+      marginRight: 16,
     },
     language: {
       color: '#62646A',
