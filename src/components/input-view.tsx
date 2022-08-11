@@ -6,9 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {GenericNavigationProps} from '../routes/types';
 import {SpeakerHigh, X} from 'phosphor-react-native';
+import {useNavigation} from '@react-navigation/core';
 
 export default function InputView() {
+  const navigation = useNavigation<GenericNavigationProps>();
   const [input, setInput] = useState<string>();
   const style = styles();
 
@@ -16,11 +19,18 @@ export default function InputView() {
     setInput('');
   }
 
+  function pressedToSpeak() {
+    navigation.push('SpeechDetection');
+  }
+
   return (
     <View style={style.container}>
       <View style={style.header}>
         <View style={style.headerLeft}>
-          <SpeakerHigh size={22} weight={'fill'} color={'#5F6369'} />
+          <TouchableOpacity onPress={pressedToSpeak}>
+            <SpeakerHigh size={22} weight={'fill'} color={'#5F6369'} />
+          </TouchableOpacity>
+
           <Text style={style.language}>İNGİLİZCE</Text>
         </View>
 
