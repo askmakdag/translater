@@ -3,8 +3,10 @@ import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {GenericNavigationProps} from '../routes/types';
 import {Microphone, X} from 'phosphor-react-native';
 import {useNavigation} from '@react-navigation/core';
+import {useTranslation} from 'react-i18next';
 
 export default function InputView() {
+  const {t} = useTranslation();
   const navigation = useNavigation<GenericNavigationProps>();
   const [input, setInput] = useState<string>();
   const style = styles();
@@ -22,7 +24,7 @@ export default function InputView() {
       <View style={style.header}>
         <View style={style.headerLeft}>
           <TextInput
-            placeholder={'Metin giriniz...'}
+            placeholder={t('input:enterText')}
             value={input}
             onChangeText={setInput}
             style={style.textInput}

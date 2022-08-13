@@ -7,8 +7,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {IconWeight, SpeakerHigh, Star} from 'phosphor-react-native';
+import {useSelector} from 'react-redux';
+import {target} from '../redux/main/selectors';
+import {useTranslation} from 'react-i18next';
 
 export default function OutputView() {
+  const {t} = useTranslation();
+  const targetLanguage = useSelector(target);
   const style = styles();
   const [starWight, setStarWeight] = useState<IconWeight>('bold');
 
@@ -21,7 +26,7 @@ export default function OutputView() {
   return (
     <View style={style.container}>
       <View style={style.header}>
-        <Text style={style.language}>TÜRKÇE</Text>
+        <Text style={style.language}>{t(`languages:${targetLanguage}`)}</Text>
 
         <TouchableOpacity onPress={makeItFavorite}>
           <Star size={22} weight={starWight} color={'#FFFFFF'} />
@@ -29,7 +34,7 @@ export default function OutputView() {
       </View>
 
       <TextInput
-        defaultValue={'.....'}
+        defaultValue={'...'}
         style={style.textInput}
         multiline={true}
         numberOfLines={4}
