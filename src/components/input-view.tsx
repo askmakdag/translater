@@ -6,13 +6,17 @@ import {useNavigation} from '@react-navigation/core';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
 import {translationRequestAction} from '../redux/main/actions';
+import {Colors} from '../theme/types';
+import {useTheme} from '@react-navigation/native';
 
 export default function InputView() {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation<GenericNavigationProps>();
+  const {colors} = useTheme();
+  const style = styles(colors);
+
   const [input, setInput] = useState<string>();
-  const style = styles();
 
   function clearInput() {
     setInput('');
@@ -35,19 +39,18 @@ export default function InputView() {
   return (
     <View style={style.container}>
       <View style={style.header}>
-        <View style={style.headerLeft}>
-          <TextInput
-            placeholder={t('input:enterText')}
-            value={input}
-            onChangeText={setInput}
-            style={style.textInput}
-            multiline={true}
-            enablesReturnKeyAutomatically={true}
-            numberOfLines={4}
-            returnKeyType={'go'}
-            onSubmitEditing={doTranslate}
-          />
-        </View>
+        <TextInput
+          placeholder={t('input:enterText')}
+          placeholderTextColor={colors.inputCard.placeholder}
+          value={input}
+          onChangeText={setInput}
+          style={style.textInput}
+          multiline={true}
+          enablesReturnKeyAutomatically={true}
+          numberOfLines={4}
+          returnKeyType={'go'}
+          onSubmitEditing={doTranslate}
+        />
 
         <TouchableOpacity
           onPress={pressedToSpeak}
@@ -65,14 +68,14 @@ export default function InputView() {
   );
 }
 
-const styles = () =>
+const styles = (colors: Colors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: 'white',
+      backgroundColor: colors.inputCard.background,
       paddingHorizontal: '5%',
       paddingVertical: 8,
       borderBottomWidth: 1,
-      borderBottomColor: '#dedede',
+      borderBottomColor: colors.border,
     },
     header: {
       flexDirection: 'row',
@@ -91,16 +94,18 @@ const styles = () =>
       marginRight: 16,
     },
     language: {
-      color: '#62646A',
+      color: colors.inputCard.text,
       fontSize: 14,
       paddingHorizontal: 12,
     },
     textInput: {
+      flex: 1,
       textAlignVertical: 'top',
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: '500',
       marginVertical: 8,
       lineHeight: 18,
       height: 80,
+      color: colors.inputCard.text,
     },
   });

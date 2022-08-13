@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import {useTheme} from '@react-navigation/native';
+import {Colors} from '../theme/types';
 
 interface HeaderProps {
   left?: JSX.Element;
@@ -10,6 +12,8 @@ interface HeaderProps {
 
 export default function Header({left, title, right}: HeaderProps) {
   const {t} = useTranslation();
+  const {colors} = useTheme();
+  const style = styles(colors);
 
   return (
     <View style={style.container}>
@@ -22,27 +26,28 @@ export default function Header({left, title, right}: HeaderProps) {
   );
 }
 
-const style = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: 50,
-    width: '100%',
-    paddingHorizontal: 8,
-    backgroundColor: '#1973E7',
-  },
-  left: {
-    flex: 1,
-  },
-  title: {
-    flex: 1,
-    color: 'white',
-    fontSize: 17,
-    textAlign: 'center',
-  },
-  right: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-});
+const styles = (colors: Colors) =>
+  StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      height: 50,
+      width: '100%',
+      paddingHorizontal: 8,
+      backgroundColor: colors.header,
+    },
+    left: {
+      flex: 1,
+    },
+    title: {
+      flex: 1,
+      color: 'white',
+      fontSize: 17,
+      textAlign: 'center',
+    },
+    right: {
+      flex: 1,
+      alignItems: 'flex-end',
+    },
+  });

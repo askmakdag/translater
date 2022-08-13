@@ -1,6 +1,6 @@
 import React, {FC, Suspense, useEffect} from 'react';
-import { SafeAreaView, StatusBar } from "react-native";
-import {NavigationContainer} from '@react-navigation/native';
+import {StatusBar, View} from 'react-native';
+import {NavigationContainer, useTheme} from '@react-navigation/native';
 import {isMountedRef, navigationRef} from './routes/navigationUtils';
 import {enableScreens} from 'react-native-screens';
 import {RootStackScreen} from './routes';
@@ -10,10 +10,15 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import Splashscreen from '../src/components/Splashscreen';
 import SplashScreen from 'react-native-splash-screen';
+import useCustomTheme from './hooks/useCustomTheme';
 
 enableScreens();
 
 const App: FC = () => {
+  const theme = useCustomTheme();
+  const {colors} = useTheme();
+
+  console.log('custom theme: ', theme);
   useEffect(() => {
     isMountedRef.current = true;
     return () => (isMountedRef.current = false);
@@ -27,11 +32,14 @@ const App: FC = () => {
     <Suspense fallback={<Splashscreen />}>
       <Provider store={store}>
         <PersistGate loading={<Splashscreen />} persistor={persistor}>
-          <NavigationContainer ref={navigationRef}>
-            <SafeAreaView style={{flex: 1}}>
-              <StatusBar barStyle="light-content" backgroundColor={'#1973E7'} />
+          <NavigationContainer ref={navigationRef} theme={theme}>
+            <StatusBar
+              barStyle="light-content"
+              backgroundColor={colors.header}
+            />
+            <View style={{flex: 1}}>
               <RootStackScreen />
-            </SafeAreaView>
+            </View>
           </NavigationContainer>
         </PersistGate>
       </Provider>

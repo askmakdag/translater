@@ -10,12 +10,15 @@ import {IconWeight, SpeakerHigh, Star} from 'phosphor-react-native';
 import {useSelector} from 'react-redux';
 import {target, translatedText} from '../redux/main/selectors';
 import {useTranslation} from 'react-i18next';
+import {Colors} from '../theme/types';
+import {useTheme} from '@react-navigation/native';
 
 export default function OutputView() {
   const {t} = useTranslation();
   const targetLanguage = useSelector(target);
   const translated = useSelector(translatedText);
-  const style = styles();
+  const {colors} = useTheme();
+  const style = styles(colors);
   const [starWight, setStarWeight] = useState<IconWeight>('bold');
 
   function makeItFavorite() {
@@ -35,7 +38,8 @@ export default function OutputView() {
       </View>
 
       <TextInput
-        defaultValue={'...'}
+        placeholder={'...'}
+        placeholderTextColor={colors.outputCard.text}
         value={translated}
         style={style.textInput}
         multiline={true}
@@ -47,14 +51,14 @@ export default function OutputView() {
   );
 }
 
-const styles = () =>
+const styles = (colors: Colors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: '#1973E7',
+      backgroundColor: colors.outputCard.background,
       paddingHorizontal: '5%',
       paddingVertical: 8,
       borderBottomWidth: 1,
-      borderBottomColor: '#dedede',
+      borderBottomColor: colors.border,
       marginTop: 4,
     },
     header: {
@@ -64,7 +68,7 @@ const styles = () =>
       marginVertical: 4,
     },
     language: {
-      color: '#FFFFFF',
+      color: colors.outputCard.text,
       fontSize: 14,
     },
     textInput: {
@@ -72,7 +76,7 @@ const styles = () =>
       fontSize: 18,
       fontWeight: '500',
       marginVertical: 16,
-      color: '#FFFFFF',
+      color: colors.outputCard.text,
       lineHeight: 18,
       height: 80,
     },
