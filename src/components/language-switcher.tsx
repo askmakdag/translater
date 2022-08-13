@@ -1,31 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {ArrowsLeftRight} from 'phosphor-react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {switchLanguagesAction} from '../redux/main/actions';
+import {source, target} from '../redux/main/selectors';
+import {useTranslation} from 'react-i18next';
 
 export default function LanguageSwitcher() {
-  const [langs, setLangs] = useState({
-    source: 'Türkçe',
-    target: 'İngilizce',
-  });
+  const {t} = useTranslation();
+  const dispatch = useDispatch();
+  const sourceLanguage = useSelector(source);
+  const targetLanguage = useSelector(target);
 
   function switchLanguages() {
-    setLangs(prev => {
-      return {
-        source: prev.target,
-        target: prev.source,
-      };
-    });
+    dispatch(switchLanguagesAction());
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.source}>{langs.source}</Text>
+      <Text style={styles.source}>{t(`languages:${sourceLanguage}`)}</Text>
 
       <TouchableOpacity onPress={switchLanguages} style={styles.switcher}>
         <ArrowsLeftRight size={22} color={'gray'} weight={'bold'} />
       </TouchableOpacity>
 
-      <Text style={styles.target}>{langs.target}</Text>
+      <Text style={styles.target}>{t(`languages:${targetLanguage}`)}</Text>
     </View>
   );
 }

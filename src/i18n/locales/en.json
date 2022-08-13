@@ -1,11 +1,18 @@
 {
   "common": {
-    "turkish": "Turkish",
-    "english": "English"
+    "appName": "Translater"
+  },
+  "input": {
+    "enterText": "Enter text"
+  },
+  "languages": {
+    "tr": "Turkish",
+    "en": "English"
   },
   "header": {
     "back": "Back"
   },
-  "dashboard": {
+  "history": {
+    "searchHistory": "Search History"
   }
 }

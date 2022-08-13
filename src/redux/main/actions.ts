@@ -1,6 +1,11 @@
 import {createAction} from '@reduxjs/toolkit';
-import {LanguagePayload} from './types';
+import {TranslationRequestPayload} from './types';
 
-export const getLangListRequest = createAction<LanguagePayload>(
-  'ACTION/GET_LANG_LIST_REQUEST',
+export const translationRequestAction =
+  createAction<TranslationRequestPayload>('action/translate');
+
+export const switchLanguagesAction = createAction('action/switchLanguages');
+
+export const addToSearchHistoryAction = createAction(
+  'action/addToSearchHistory',
 );

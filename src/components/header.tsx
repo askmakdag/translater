@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
 interface HeaderProps {
   left?: JSX.Element;
@@ -7,16 +8,14 @@ interface HeaderProps {
   right?: JSX.Element;
 }
 
-export default function Header({
-  left,
-  title = 'Translater',
-  right,
-}: HeaderProps) {
+export default function Header({left, title, right}: HeaderProps) {
+  const {t} = useTranslation();
+
   return (
     <View style={style.container}>
       <View style={style.left}>{left}</View>
 
-      <Text style={style.title}>{title}</Text>
+      <Text style={style.title}>{title ?? t('common:appName')}</Text>
 
       <View style={style.right}>{right}</View>
     </View>

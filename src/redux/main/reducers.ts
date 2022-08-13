@@ -1,20 +1,30 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {getLangListRequest} from './actions';
+import {switchLanguagesAction, translationRequestAction} from './actions';
+import {Languages, SearchHistoryItem} from './types';
 
 export interface LanguageState {
-  langList: {
-    lang: string;
-  };
+  q: string;
+  source: Languages;
+  target: Languages;
+  searchHistory: SearchHistoryItem[];
+  translatedText: string;
 }
 
 const initialState: LanguageState = {
-  langList: {
-    lang: 'en-EN',
-  },
+  q: '',
+  source: Languages.Turkish,
+  target: Languages.English,
+  translatedText: '',
+  searchHistory: [],
 };
 
-export const langReducer = createReducer(initialState, {
-  [getLangListRequest.type]: state => {
-    state.langList.lang = '';
+export const translate = createReducer(initialState, {
+  [translationRequestAction.type]: (state, action) => {
+    //
+  },
+  [switchLanguagesAction.type]: state => {
+    const temp = state.source;
+    state.source = state.target;
+    state.target = temp;
   },
 });

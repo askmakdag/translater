@@ -1,11 +1,20 @@
 {
   "common": {
-    "turkish": "Türkçe",
-    "english": "İngilizce"
+    "appName": "Translater"
+  },
+  "input": {
+    "enterText": "Metin girin",
+  },
+  "languages": {
+    "tr": "Türkçe",
+    "en": "İngilizce"
   },
   "header": {
     "back": "Geri"
   },
   "dashboard": {
+  },
+  "history": {
+    "searchHistory": "Arama Geçmişi"
   }
 }

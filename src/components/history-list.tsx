@@ -1,25 +1,32 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, FlatList} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import {useSelector} from 'react-redux';
+import {searchHistory} from '../redux/main/selectors';
+import {SearchHistoryItem} from '../redux/main/types';
 
 export default function HistoryList() {
+  const {t} = useTranslation();
+  const history = useSelector(searchHistory);
+
   function onPressed() {}
 
-  function renderItem({item, index}) {
+  function renderItem({item}: {item: SearchHistoryItem}) {
     return (
       <TouchableOpacity style={style.row} onPress={onPressed}>
-        <Text style={style.source}>Hello</Text>
-        <Text style={style.target}>Merhaba</Text>
+        <Text style={style.source}>{item.q}</Text>
+        <Text style={style.target}>{item.translatedText}</Text>
       </TouchableOpacity>
     );
   }
 
   function renderHeader() {
-    return <Text style={{padding: 8}}> History List </Text>;
+    return <Text style={{padding: 8}}>{t('history:searchHistory')}</Text>;
   }
 
   return (
     <FlatList
-      data={[1, 2, 3]}
+      data={history}
       renderItem={renderItem}
       ListHeaderComponent={renderHeader}
       keyExtractor={(item, index) => index.toString()}

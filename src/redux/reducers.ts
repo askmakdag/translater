@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {langReducer} from './main/reducers';
+import {translate} from './main/reducers';
 import {persistCombineReducers} from 'redux-persist';
 
 const reducers = {
-  languages: langReducer,
+  translate,
 };
 
 const persistConfig = {
