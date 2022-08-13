@@ -8,12 +8,13 @@ import {
 } from 'react-native';
 import {IconWeight, SpeakerHigh, Star} from 'phosphor-react-native';
 import {useSelector} from 'react-redux';
-import {target} from '../redux/main/selectors';
+import {target, translatedText} from '../redux/main/selectors';
 import {useTranslation} from 'react-i18next';
 
 export default function OutputView() {
   const {t} = useTranslation();
   const targetLanguage = useSelector(target);
+  const translated = useSelector(translatedText);
   const style = styles();
   const [starWight, setStarWeight] = useState<IconWeight>('bold');
 
@@ -35,6 +36,7 @@ export default function OutputView() {
 
       <TextInput
         defaultValue={'...'}
+        value={translated}
         style={style.textInput}
         multiline={true}
         numberOfLines={4}

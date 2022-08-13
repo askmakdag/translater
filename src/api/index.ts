@@ -14,7 +14,10 @@ const ApiClient = axios.create({
   baseURL: Config.API_URL,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    'content-type': 'application/x-www-form-urlencoded',
+    'Accept-Encoding': 'application/gzip',
+    'X-RapidAPI-Key': Config.X_RAPID_API_KEY,
+    'X-RapidAPI-Host': Config.X_RAPID_API_HOST,
   },
   adapter: cache.adapter,
 });
@@ -24,6 +27,7 @@ const ApiClient = axios.create({
 // export and call it in an init function of the application/page.
 ApiClient.interceptors.request.use(
   async function (config) {
+    console.log('request: ', config);
     return config;
   },
   async function (error) {
@@ -36,11 +40,13 @@ ApiClient.interceptors.request.use(
 ApiClient.interceptors.response.use(
   async function (response) {
     // Request was successful, e.g. HTTP code 200
+    console.log('response: ', response);
     return response;
   },
   async function (error) {
     // Request failed, e.g. HTTP code 500
     // Ensure failed requests throw after interception
+    console.log('response error: ', error);
     return Promise.reject(error);
   },
 );

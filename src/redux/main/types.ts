@@ -5,21 +5,27 @@ export enum Languages {
 
 export type TranslationRequestPayload = {
   q: string;
-  source: Languages;
-  target: Languages;
-  format: string;
-  api_key: string;
+  source?: Languages;
+  target?: Languages;
 };
 
-export type SearchHistoryItem = Omit<
-  TranslationRequestPayload & TranslationSuccessPayload,
-  'api_key' | 'format'
+export type TranslationRequestActionPayload = Omit<
+  TranslationRequestPayload,
+  'source' | 'target'
 >;
 
-export type TranslationSuccessPayload = {
+export type SearchHistoryItem = TranslationRequestPayload & {
   translatedText: string;
 };
 
-export type LanguagePayload = {
-  lang?: string;
+export type Translation = {
+  translatedText: string;
+};
+
+export type TranslationSuccessPayload = {
+  data: {
+    data: {
+      translations: Translation[];
+    };
+  };
 };

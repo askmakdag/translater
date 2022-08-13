@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {switchLanguagesAction, translationRequestAction} from './actions';
+import { addToSearchHistoryAction, switchLanguagesAction, translationRequestAction } from "./actions";
 import {Languages, SearchHistoryItem} from './types';
 
 export interface LanguageState {
@@ -20,7 +20,11 @@ const initialState: LanguageState = {
 
 export const translate = createReducer(initialState, {
   [translationRequestAction.type]: (state, action) => {
-    //
+    state.q = action.payload.q;
+  },
+  [addToSearchHistoryAction.type]: (state, action) => {
+    state.translatedText = action.payload.translatedText;
+    state.searchHistory.push(action.payload);
   },
   [switchLanguagesAction.type]: state => {
     const temp = state.source;

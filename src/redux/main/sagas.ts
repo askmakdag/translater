@@ -1,16 +1,36 @@
-import {call, ForkEffect, takeLatest} from 'redux-saga/effects';
-import {translationRequestAction} from './actions';
-import {TranslationRequestPayload, TranslationSuccessPayload} from './types';
+import {put, call, select, ForkEffect, takeLatest} from 'redux-saga/effects';
+import {addToSearchHistoryAction, translationRequestAction} from './actions';
+import {
+  TranslationRequestActionPayload,
+  TranslationSuccessPayload,
+} from './types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import * as TranslationAPI from './apiCall';
 
-function* doTranslate({payload}: PayloadAction<TranslationRequestPayload>) {
+function* doTranslate({
+  payload,
+}: PayloadAction<TranslationRequestActionPayload>) {
   try {
-    const response: TranslationSuccessPayload = yield call(
-      TranslationAPI.translate,
-      {...payload},
+    const {source, target} = yield select(s => s.translate);
+    const {
+      data: {
+        data: {translations},
+      },
+    }: TranslationSuccessPayload = yield call(TranslationAPI.translate, {
+      ...payload,
+      source,
+      target,
+    });
+
+    const translatedText: string = translations[0].translatedText;
+    yield put(
+      addToSearchHistoryAction({
+        ...payload,
+        source,
+        target,
+        translatedText,
+      }),
     );
-    console.log('response success: ', response);
   } catch (err) {}
 }
 

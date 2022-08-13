@@ -4,9 +4,12 @@ import {GenericNavigationProps} from '../routes/types';
 import {Microphone, X} from 'phosphor-react-native';
 import {useNavigation} from '@react-navigation/core';
 import {useTranslation} from 'react-i18next';
+import {useDispatch} from 'react-redux';
+import {translationRequestAction} from '../redux/main/actions';
 
 export default function InputView() {
   const {t} = useTranslation();
+  const dispatch = useDispatch();
   const navigation = useNavigation<GenericNavigationProps>();
   const [input, setInput] = useState<string>();
   const style = styles();
@@ -19,6 +22,16 @@ export default function InputView() {
     navigation.push('SpeechDetection');
   }
 
+  function doTranslate() {
+    if (input) {
+      dispatch(
+        translationRequestAction({
+          q: input,
+        }),
+      );
+    }
+  }
+
   return (
     <View style={style.container}>
       <View style={style.header}>
@@ -29,7 +42,10 @@ export default function InputView() {
             onChangeText={setInput}
             style={style.textInput}
             multiline={true}
+            enablesReturnKeyAutomatically={true}
             numberOfLines={4}
+            returnKeyType={'go'}
+            onSubmitEditing={doTranslate}
           />
         </View>
 
