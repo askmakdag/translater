@@ -4,6 +4,7 @@ import Header from '../components/header';
 import LanguageSwitcher from '../components/language-switcher';
 import InputView from '../components/input-view';
 import OutputView from '../components/output-view';
+import HistoryList from '../components/history-list';
 
 export default function Dashboard() {
   return (
@@ -12,6 +13,7 @@ export default function Dashboard() {
       <LanguageSwitcher />
       <InputView />
       <OutputView />
+      <HistoryList />
     </View>
   );
 }
