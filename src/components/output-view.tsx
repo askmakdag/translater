@@ -23,7 +23,7 @@ export default function OutputView() {
 
   function makeItFavorite() {
     setStarWeight(prev => {
-      return prev === 'bold' ? 'duotone' : 'bold';
+      return prev === 'bold' ? 'fill' : 'bold';
     });
   }
 
@@ -39,7 +39,7 @@ export default function OutputView() {
 
       <TextInput
         placeholder={'...'}
-        placeholderTextColor={colors.outputCard.text}
+        placeholderTextColor={colors.outputCard.placeholder}
         value={translated}
         style={style.textInput}
         multiline={true}

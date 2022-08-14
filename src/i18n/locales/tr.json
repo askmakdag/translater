@@ -16,5 +16,9 @@
   },
   "history": {
     "searchHistory": "Arama Geçmişi"
+  },
+  "speechDetection": {
+    "speakNow": "Şimdi konuşun",
+    "listening": "Dinleniyor..."
   }
 }

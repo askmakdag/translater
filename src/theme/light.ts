@@ -7,6 +7,7 @@ export const lightTheme = {
     text: '#000',
     border: '#DFE0E4',
     notification: '#ffffff',
+    placeholder: '#919191',
 
     header: '#1973E7',
     inputCard: {
@@ -22,6 +23,12 @@ export const lightTheme = {
     switchCard: {
       background: '#fff',
       text: '#000',
+    },
+    historyCard: {
+      header: '#51565C',
+      background: '#fff',
+      source: '#000',
+      target: '#51565C',
     },
   },
 };

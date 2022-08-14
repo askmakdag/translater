@@ -14,5 +14,9 @@
   },
   "history": {
     "searchHistory": "Search History"
+  },
+  "speechDetection": {
+    "speakNow": "Speak Now",
+    "listening": "Listening..."
   }
 }

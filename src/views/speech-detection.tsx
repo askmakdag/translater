@@ -1,27 +1,25 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import Lottie from 'lottie-react-native';
-import {MICROPHONE2} from '../assets/lottie';
 import {X} from 'phosphor-react-native';
 import {useNavigation} from '@react-navigation/core';
+import {useTheme} from '@react-navigation/native';
+import {Colors} from '../theme/types';
+import {useTranslation} from 'react-i18next';
+import VoiceRecognizer from '../components/voice-recognizer';
 
 export default function SpeechDetection() {
+  const {t} = useTranslation();
   const navigation = useNavigation();
-  const animationRef = useRef<Lottie>(null);
-  const [input, setInput] = useState();
+  const [input, setInput] = useState(t('speechDetection:speakNow'));
 
-  useEffect(() => {
-    animationRef.current?.play();
-  }, []);
-
-  function onDetect() {}
+  const {colors} = useTheme();
+  const style = styles(colors);
 
   function cancelDetection() {
     navigation.goBack();
@@ -29,28 +27,16 @@ export default function SpeechDetection() {
 
   return (
     <SafeAreaView style={style.container}>
-      <TextInput
-        placeholder={'Metin giriniz...'}
-        value={input}
-        style={style.textInput}
-        multiline={true}
-        numberOfLines={4}
-      />
+      <Text style={style.textInput}>{input}</Text>
 
       <View>
-        <TouchableOpacity onPress={onDetect}>
-          <Lottie
-            ref={animationRef}
-            source={MICROPHONE2}
-            style={{height: 150, width: 150, alignSelf: 'center'}}
-          />
-        </TouchableOpacity>
+        <VoiceRecognizer />
 
         <View style={style.bottom}>
           <TouchableOpacity style={{flex: 1}} onPress={cancelDetection}>
-            <X weight={'bold'} style={{margin: 8}} />
+            <X weight={'bold'} color={colors.text} style={style.x} />
           </TouchableOpacity>
-          <Text style={{flex: 1, textAlign: 'center'}}>English</Text>
+          <Text style={style.target}>English</Text>
           <View style={{flex: 1}} />
         </View>
       </View>
@@ -58,21 +44,32 @@ export default function SpeechDetection() {
   );
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  textInput: {
-    textAlignVertical: 'top',
-    fontSize: 18,
-    fontWeight: '500',
-    marginVertical: 8,
-    lineHeight: 18,
-    height: 80,
-  },
-  bottom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-});
+const styles = (colors: Colors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      backgroundColor: colors.background,
+    },
+    textInput: {
+      color: colors.placeholder,
+      textAlignVertical: 'top',
+      fontSize: 18,
+      fontWeight: '500',
+      margin: 24,
+      lineHeight: 18,
+      height: 80,
+    },
+    bottom: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    x: {
+      margin: 8,
+    },
+    target: {
+      flex: 1,
+      textAlign: 'center',
+      color: colors.text,
+    },
+  });

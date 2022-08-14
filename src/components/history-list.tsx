@@ -4,10 +4,15 @@ import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
 import {searchHistory} from '../redux/main/selectors';
 import {SearchHistoryItem} from '../redux/main/types';
+import {Colors} from '../theme/types';
+import {useTheme} from '@react-navigation/native';
 
 export default function HistoryList() {
   const {t} = useTranslation();
   const history = useSelector(searchHistory);
+
+  const {colors} = useTheme();
+  const style = styles(colors);
 
   function onPressed() {}
 
@@ -21,7 +26,7 @@ export default function HistoryList() {
   }
 
   function renderHeader() {
-    return <Text style={{padding: 8}}>{t('history:searchHistory')}</Text>;
+    return <Text style={style.header}>{t('history:searchHistory')}</Text>;
   }
 
   return (
@@ -35,33 +40,38 @@ export default function HistoryList() {
   );
 }
 
-const style = StyleSheet.create({
-  container: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0.4,
-      height: 0.4,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
+const styles = (colors: Colors) =>
+  StyleSheet.create({
+    container: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0.4,
+        height: 0.4,
+      },
+      shadowOpacity: 0.18,
+      shadowRadius: 1.0,
 
-    elevation: 1,
-  },
-  row: {
-    width: '96%',
-    alignSelf: 'center',
-    padding: 8,
-    backgroundColor: '#fff',
-    borderBottomWidth: 0.6,
-    borderBottomColor: '#dedede',
-  },
-  source: {
-    color: '#000',
-    fontSize: 16,
-  },
-  target: {
-    color: '#51565C',
-    fontSize: 15,
-    paddingVertical: 4,
-  },
-});
+      elevation: 1,
+    },
+    header: {
+      padding: 12,
+      color: colors.historyCard.header,
+    },
+    row: {
+      width: '96%',
+      alignSelf: 'center',
+      padding: 8,
+      backgroundColor: colors.historyCard.background,
+      borderBottomWidth: 0.6,
+      borderBottomColor: '#dedede',
+    },
+    source: {
+      color: colors.historyCard.source,
+      fontSize: 16,
+    },
+    target: {
+      color: colors.historyCard.target,
+      fontSize: 15,
+      paddingVertical: 4,
+    },
+  });
