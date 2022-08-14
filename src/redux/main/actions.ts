@@ -9,3 +9,5 @@ export const switchLanguagesAction = createAction('action/switchLanguages');
 export const addToSearchHistoryAction = createAction<SearchHistoryItem>(
   'action/addToSearchHistory',
 );
+
+export const clearQueryAction = createAction('action/clearQuery');

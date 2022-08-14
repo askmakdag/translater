@@ -4,14 +4,19 @@ import {GenericNavigationProps} from '../routes/types';
 import {Microphone, X} from 'phosphor-react-native';
 import {useNavigation} from '@react-navigation/core';
 import {useTranslation} from 'react-i18next';
-import {useDispatch} from 'react-redux';
-import {translationRequestAction} from '../redux/main/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  clearQueryAction,
+  translationRequestAction,
+} from '../redux/main/actions';
 import {Colors} from '../theme/types';
 import {useTheme} from '@react-navigation/native';
+import {q} from '../redux/main/selectors';
 
 export default function InputView() {
   const {t} = useTranslation();
   const dispatch = useDispatch();
+  const query = useSelector(q);
   const navigation = useNavigation<GenericNavigationProps>();
   const {colors} = useTheme();
   const style = styles(colors);
@@ -19,6 +24,7 @@ export default function InputView() {
   const [input, setInput] = useState<string>();
 
   function clearInput() {
+    dispatch(clearQueryAction());
     setInput('');
   }
 
@@ -42,7 +48,7 @@ export default function InputView() {
         <TextInput
           placeholder={t('input:enterText')}
           placeholderTextColor={colors.inputCard.placeholder}
-          value={input}
+          value={query ?? input}
           onChangeText={setInput}
           style={style.textInput}
           multiline={true}
@@ -54,13 +60,13 @@ export default function InputView() {
 
         <TouchableOpacity
           onPress={pressedToSpeak}
-          style={{padding: 4, display: input ? 'none' : 'flex'}}>
+          style={{padding: 4, display: input || query ? 'none' : 'flex'}}>
           <Microphone size={23} weight={'duotone'} color={'#5F6369'} />
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={clearInput}
-          style={{padding: 4, display: input ? 'flex' : 'none'}}>
+          style={{padding: 4, display: input || query ? 'flex' : 'none'}}>
           <X size={23} weight={'duotone'} color={'#5F6369'} />
         </TouchableOpacity>
       </View>
