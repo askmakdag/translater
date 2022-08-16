@@ -1,24 +1,17 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {combineReducers} from 'redux';
 import {translate} from './main/reducers';
-import {persistCombineReducers} from 'redux-persist';
+import {persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const reducers = {
-  translate,
-};
-
-const persistConfig = {
+const translatePersistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  // There is an issue in the source code of redux-persist (default setTimeout does not cleaning)
-  timeout: undefined,
-  whitelist: [''],
+  whitelist: ['searchHistory'],
 };
 
-// Setup Reducers
-export const persistedRootReducer = persistCombineReducers(
-  persistConfig,
-  reducers,
-);
+export const persistedRootReducer = combineReducers({
+  translate: persistReducer(translatePersistConfig, translate),
+});
 
 export type RootState = ReturnType<typeof persistedRootReducer>;
 
