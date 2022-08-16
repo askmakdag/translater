@@ -6,9 +6,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {IconWeight, SpeakerHigh, Star} from 'phosphor-react-native';
+import {IconWeight, Star} from 'phosphor-react-native';
 import {useSelector} from 'react-redux';
-import {target, translatedText} from '../redux/main/selectors';
+import {target, translatedText} from '../redux/translate/selectors';
 import {useTranslation} from 'react-i18next';
 import {Colors} from '../theme/types';
 import {useTheme} from '@react-navigation/native';
@@ -45,8 +45,6 @@ export default function OutputView() {
         multiline={true}
         numberOfLines={4}
       />
-
-      <SpeakerHigh size={22} color={'#FFFFFF'} weight={'fill'} />
     </View>
   );
 }

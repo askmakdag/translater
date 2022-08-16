@@ -1,24 +1,35 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, FlatList} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {useSelector} from 'react-redux';
-import {searchHistory} from '../redux/main/selectors';
-import {SearchHistoryItem} from '../redux/main/types';
+import {useDispatch, useSelector} from 'react-redux';
+import {searchHistory} from '../redux/translate/selectors';
+import {SearchHistoryItem} from '../redux/translate/types';
 import {Colors} from '../theme/types';
 import {useTheme} from '@react-navigation/native';
+import {triggerHistoryItemAction} from '../redux/translate/actions';
 
 export default function HistoryList() {
   const {t} = useTranslation();
+  const dispatch = useDispatch();
   const history = useSelector(searchHistory);
 
   const {colors} = useTheme();
   const style = styles(colors);
 
-  function onPressed() {}
+  function onPressed({q, target, source, translatedText}: SearchHistoryItem) {
+    dispatch(
+      triggerHistoryItemAction({
+        q,
+        target,
+        source,
+        translatedText,
+      }),
+    );
+  }
 
   function renderItem({item}: {item: SearchHistoryItem}) {
     return (
-      <TouchableOpacity style={style.row} onPress={onPressed}>
+      <TouchableOpacity style={style.row} onPress={() => onPressed(item)}>
         <Text style={style.source}>{item.q}</Text>
         <Text style={style.target}>{item.translatedText}</Text>
       </TouchableOpacity>
@@ -35,7 +46,7 @@ export default function HistoryList() {
       renderItem={renderItem}
       ListHeaderComponent={renderHeader}
       keyExtractor={(item, index) => index.toString()}
-      style={style.container}
+      style={[style.container, {display: history.length > 0 ? 'flex' : 'none'}]}
     />
   );
 }
@@ -63,7 +74,7 @@ const styles = (colors: Colors) =>
       padding: 8,
       backgroundColor: colors.historyCard.background,
       borderBottomWidth: 0.6,
-      borderBottomColor: '#dedede',
+      borderBottomColor: colors.border,
     },
     source: {
       color: colors.historyCard.source,

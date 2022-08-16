@@ -1,5 +1,5 @@
 import React, {FC, Suspense, useEffect} from 'react';
-import {StatusBar, View} from 'react-native';
+import {StatusBar} from 'react-native';
 import {NavigationContainer, useTheme} from '@react-navigation/native';
 import {isMountedRef, navigationRef} from './routes/navigationUtils';
 import {enableScreens} from 'react-native-screens';
@@ -18,7 +18,6 @@ const App: FC = () => {
   const theme = useCustomTheme();
   const {colors} = useTheme();
 
-  console.log('custom theme: ', theme);
   useEffect(() => {
     isMountedRef.current = true;
     return () => (isMountedRef.current = false);
@@ -37,9 +36,7 @@ const App: FC = () => {
               barStyle="light-content"
               backgroundColor={colors.header}
             />
-            <View style={{flex: 1}}>
-              <RootStackScreen />
-            </View>
+            <RootStackScreen />
           </NavigationContainer>
         </PersistGate>
       </Provider>

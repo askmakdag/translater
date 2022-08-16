@@ -5,7 +5,7 @@ export const darkTheme = {
     background: '#050505',
     card: '#ffffff',
     text: '#EEEFFF',
-    border: '#5A5E64',
+    border: '#3f4042',
     notification: '#ffffff',
     placeholder: '#919191',
 

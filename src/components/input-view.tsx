@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {GenericNavigationProps} from '../routes/types';
 import {Microphone, X} from 'phosphor-react-native';
@@ -8,10 +8,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   clearQueryAction,
   translationRequestAction,
-} from '../redux/main/actions';
+} from '../redux/translate/actions';
 import {Colors} from '../theme/types';
 import {useTheme} from '@react-navigation/native';
-import {q} from '../redux/main/selectors';
+import {q} from '../redux/translate/selectors';
 
 export default function InputView() {
   const {t} = useTranslation();
@@ -22,6 +22,10 @@ export default function InputView() {
   const style = styles(colors);
 
   const [input, setInput] = useState<string>();
+
+  useEffect(() => {
+    setInput(query);
+  }, [query]);
 
   function clearInput() {
     dispatch(clearQueryAction());
@@ -48,7 +52,7 @@ export default function InputView() {
         <TextInput
           placeholder={t('input:enterText')}
           placeholderTextColor={colors.inputCard.placeholder}
-          value={query ?? input}
+          value={input}
           onChangeText={setInput}
           style={style.textInput}
           multiline={true}

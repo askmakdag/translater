@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Header from '../components/header';
 import LanguageSwitcher from '../components/language-switcher';
 import InputView from '../components/input-view';
@@ -7,7 +7,7 @@ import OutputView from '../components/output-view';
 import HistoryList from '../components/history-list';
 import {useTheme} from '@react-navigation/native';
 import {Colors} from '../theme/types';
-import {translatedText} from '../redux/main/selectors';
+import {translatedText} from '../redux/translate/selectors';
 import {useSelector} from 'react-redux';
 
 export default function Dashboard() {
@@ -16,13 +16,13 @@ export default function Dashboard() {
   const translatedResult = useSelector(translatedText);
 
   return (
-    <SafeAreaView style={style.container}>
+    <View style={style.container}>
       <Header />
       <LanguageSwitcher />
       <InputView />
       {translatedResult && <OutputView />}
       <HistoryList />
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -14,9 +14,9 @@ import {useTranslation} from 'react-i18next';
 import Lottie from 'lottie-react-native';
 import Voice from '@react-native-voice/voice';
 import {MICROPHONE2} from '../assets/lottie';
-import {translationRequestAction} from '../redux/main/actions';
+import {translationRequestAction} from '../redux/translate/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {source} from '../redux/main/selectors';
+import {source} from '../redux/translate/selectors';
 
 export default function SpeechDetection() {
   const {t} = useTranslation();
@@ -214,6 +214,7 @@ const styles = (colors: Colors) =>
     },
     target: {
       flex: 1,
+      fontSize: 16,
       textAlign: 'center',
       color: colors.text,
     },

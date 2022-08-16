@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import {Colors} from '../theme/types';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface HeaderProps {
   left?: JSX.Element;
@@ -14,9 +15,11 @@ export default function Header({left, title, right}: HeaderProps) {
   const {t} = useTranslation();
   const {colors} = useTheme();
   const style = styles(colors);
+  const insets = useSafeAreaInsets();
+  const statusBarHeight = insets.top;
 
   return (
-    <View style={style.container}>
+    <View style={[style.container, {paddingTop: statusBarHeight}]}>
       <View style={style.left}>{left}</View>
 
       <Text style={style.title}>{title ?? t('common:appName')}</Text>
@@ -32,8 +35,8 @@ const styles = (colors: Colors) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      height: 50,
       width: '100%',
+      paddingVertical: 16,
       paddingHorizontal: 8,
       backgroundColor: colors.header,
     },
@@ -43,7 +46,7 @@ const styles = (colors: Colors) =>
     title: {
       flex: 1,
       color: 'white',
-      fontSize: 17,
+      fontSize: 18,
       textAlign: 'center',
     },
     right: {

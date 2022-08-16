@@ -1,1 +1,1 @@
-export * from './main/actions';
+export * from './translate/actions';
