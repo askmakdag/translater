@@ -58,8 +58,8 @@ npm run ios
 
 <p float="left">
   <img src="https://user-images.githubusercontent.com/37984694/185242307-3945ee88-48e2-4d07-872c-f20f14980e00.jpeg" width="248" height="441">
-  <img src="https://user-images.githubusercontent.com/37984694/185242323-b2da84f6-3774-46dd-b66e-d4452f23c6d9.PNG" width="248" height="441">
   <img src="https://user-images.githubusercontent.com/37984694/185242336-1241611f-3b03-4334-af6c-f4ed7ce416a1.PNG" width="248" height="441">
+  <img src="https://user-images.githubusercontent.com/37984694/185242323-b2da84f6-3774-46dd-b66e-d4452f23c6d9.PNG" width="248" height="441">
 </p>
 
 <p float="left">
