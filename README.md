@@ -56,6 +56,9 @@ or
 npm run ios
 ```
 
+### Screenshots froom the app
+
+
 <p float="left">
   <img src="https://user-images.githubusercontent.com/37984694/185242307-3945ee88-48e2-4d07-872c-f20f14980e00.jpeg" width="165" height="294">
   
