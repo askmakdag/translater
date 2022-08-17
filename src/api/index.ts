@@ -27,7 +27,7 @@ const ApiClient = axios.create({
 // export and call it in an init function of the application/page.
 ApiClient.interceptors.request.use(
   async function (config) {
-    console.log('request: ', config);
+    // console.log('request: ', config);
     return config;
   },
   async function (error) {
@@ -40,13 +40,13 @@ ApiClient.interceptors.request.use(
 ApiClient.interceptors.response.use(
   async function (response) {
     // Request was successful, e.g. HTTP code 200
-    console.log('response: ', response);
+    // console.log('response: ', response);
     return response;
   },
   async function (error) {
     // Request failed, e.g. HTTP code 500
     // Ensure failed requests throw after interception
-    console.log('response error: ', error);
+    // console.log('response error: ', error);
     return Promise.reject(error);
   },
 );

@@ -12,7 +12,7 @@ function* rootSaga(): Generator<AllEffect<ForkEffect<void>>> {
             yield call(saga);
             break;
           } catch (e) {
-            console.error(e);
+            // console.error(e);
           }
         }
       }),

@@ -92,22 +92,6 @@ const styles = (colors: Colors) =>
       justifyContent: 'space-between',
       marginVertical: 4,
     },
-    headerLeft: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    headerRight: {
-      flexDirection: 'row',
-      backgroundColor: 'red',
-    },
-    microphone: {
-      marginRight: 16,
-    },
-    language: {
-      color: colors.inputCard.text,
-      fontSize: 14,
-      paddingHorizontal: 12,
-    },
     textInput: {
       flex: 1,
       textAlignVertical: 'top',
