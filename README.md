@@ -56,7 +56,7 @@ or
 npm run ios
 ```
 
-### Screenshots froom the app
+### Screenshots from the app
 
 
 <p float="left">
