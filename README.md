@@ -7,7 +7,8 @@ An experimental React Native project
 
 ✅ `Typescript` <br />
 ✅ `react-native-splashscreen` (https://github.com/crazycodeboy/react-native-splash-screen) ️<br />
-✅ `React-Native 0.69 (new architecture)`<br/>
+✅ `React-Native 0.69`<br/>
+✅ `React-Native Cli`<br/>
 ✅ `redux-toolkit` <br/>
 ✅ `redux-persist` (https://github.com/rt2zz/redux-persist) ️<br />
 ✅ `React Native Debugger` <br/>
@@ -27,14 +28,23 @@ An experimental React Native project
 In the project directory, run:
 
 ```
-npm install
+yarn install
 
 or
 
-yarn install
+npm install
+```
+### 2. Test the app
+
+```
+yarn test
+
+or 
+
+npm run test
 ```
 
-### 2. Start the app
+### 3. Start the app
 
 For Android
 
