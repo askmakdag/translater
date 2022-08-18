@@ -16,6 +16,7 @@ An experimental React Native project
 ✅ `i18next` <br/>
 ✅ `react-navigation v6` ️<br/>
 ✅ `react-native-config` with `.env` files (https://github.com/luggit/react-native-config) ️<br />
+✅ `jest` for unit testing
 
 ## Prerequisites
 ***
